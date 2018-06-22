@@ -1,0 +1,74 @@
+﻿@model CVGS.Models.Game
+@{
+    ViewBag.Title = Model.title + " - Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @{
+        int id = 0;
+        if (Session["userId"] != null)
+        {
+            id = Int32.Parse(Session["userId"].ToString());
+            @Html.ActionLink("Add to Wish List", "AddToWishList", new { gameId = Model.id, userId = id });
+            <br />
+            @Html.ActionLink("Add to Cart", "AddToCart", new { gameId = Model.id, userId = id });
+        }
+    }
+</p>
+<div>
+    <h4>Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.releaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.releaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.developer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.developer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.esrbRating)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.esrbRating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.details)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.details)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.plot)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.plot)
+        </dd>
+        <dt>Reviews</dt>
+        <dd>
+            @if (id > 0)
+            {
+                @Html.ActionLink("Add your own review", "Create", "GameReviews", new { gameId = Model.id, userId = id }, null);
+                @Html.Display(" | ");
+            }
+            @Html.ActionLink("Go to List", "ViewGameReviews", new { gameId = Model.id })
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Update", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to All Game", "Index")
+</p>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CVGS.Models.RelativeList>
+
+@{
+    ViewBag.Title = "Relatives List";
+    CVGS.Models.User u = Model.First().Member;
+    string FirstName = String.Concat(u.givenName[0].ToString().ToUpper(), u.givenName.Substring(1));
+    string LastName = String.Concat(u.surname[0].ToString().ToUpper(),u.surname.Substring(1));
+    ViewBag.Name = FirstName + " " + LastName;
+}
+
+<h2>@ViewBag.Name's @ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Select
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td class="relative-name">
+                @Html.DisplayFor(modelItem => item.Relative.givenName)
+                @Html.DisplayFor(modelItem => item.Relative.surname)
+            </td>
+            <td>
+                @Html.CheckBox(item.Relative.id.ToString())
+            </td>
+        </tr>
+    }
+</table>

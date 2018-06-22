@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CVGS.Models.EventAttendee>
+
+@{
+    if (Model.FirstOrDefault() == null)
+    {
+        ViewBag.Title = "Members Attending Event";
+    }
+    else
+    {
+        ViewBag.Title = "Members Attending Event: " + Model.FirstOrDefault().Event.name;
+    }
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.notes)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.notes)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to All Events", "Index", "Event") |
+    @if (Model.FirstOrDefault() != null)
+    {
+        @Html.ActionLink("Back to Event Details", "Details", "Event", new { id = Model.First().eventId })
+    }
+</p>

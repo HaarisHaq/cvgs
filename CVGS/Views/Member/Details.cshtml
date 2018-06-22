@@ -1,0 +1,117 @@
+﻿@model CVGS.Models.User
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserStatus.status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserStatus.status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.givenName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.givenName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.surname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.surname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.postalCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.postalCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mobile)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mobile)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fax)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fax)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.extension)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.extension)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.preferences)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.preferences)
+        </dd>
+        <dt></dt>
+        <dd>
+            @{
+                int id = 0;
+                if (Session["userId"] != null)
+                {
+                    id = Int32.Parse(Session["userId"].ToString());
+                }
+                if (id > 0 && id != Model.id)
+                {
+                    @Html.ActionLink("Add as Relative", "AddRelative", new { user1_id = id, user2_id = Model.id })
+                    <br />
+                }
+            }
+            @Html.ActionLink("See Relatives", "RelativeList", new { id = Model.id })
+        </dd>
+        <dt></dt>
+        <dd>
+            @Html.ActionLink("See Wish List", "SeeWishList", new { id = Model.id })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Update Profile", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to Member List", "Index")
+</p>

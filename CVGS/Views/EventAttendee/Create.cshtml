@@ -1,0 +1,80 @@
+﻿@model CVGS.Models.EventAttendee
+
+@{
+    ViewBag.Title = "RSVP for Event " + Model.Event.name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Confirm Attendance</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.eventId)
+        @Html.HiddenFor(model => model.userId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="form-control no-border">
+                    @Html.DisplayFor(model => model.Event.description)
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.EventType.type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="form-control no-border">
+                    @Html.DisplayFor(model => model.Event.EventType.type)
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="form-control no-border">
+                    @Html.DisplayFor(model => model.Event.location)
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="form-control no-border">
+                    @Html.DisplayFor(model => model.Event.date)
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="form-control no-border">
+                    @Html.DisplayFor(model => model.Event.time)
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.notes, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sign Up" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("See Others Attending This Event", "Index", new { eventId = Model.eventId })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

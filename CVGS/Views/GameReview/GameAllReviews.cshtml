@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CVGS.Models.GameReview>
+
+@{
+    ViewBag.Title = Model.First().Game.title + " - All Reviews";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @{
+        int id;
+        if (Session["userId"] != null)
+        {
+            id = Int32.Parse(Session["userId"].ToString());
+            @Html.ActionLink("Add a Review", "Create", new { gameId = Model.First().gameId, userId = id });
+        }
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.details)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.details)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Back to All Reviews", "Index") |
+    @Html.ActionLink("Back to Game Details", "Details", "Game", new { id = Model.First().gameId }, null)
+</p>

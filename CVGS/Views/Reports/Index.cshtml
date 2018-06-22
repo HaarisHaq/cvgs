@@ -1,0 +1,20 @@
+﻿@model IEnumerable<CVGS.Models.Report>
+
+@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>Reports</h2>
+<table class="table">
+    <tr><th>Report Title</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Reports/Details" id="@item.reportTypeId">
+                    @item.Type.type
+                </a>
+            </td>
+        </tr>
+    }
+</table>

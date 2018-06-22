@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CVGS.Models.Order
+
+@{
+    ViewBag.Title = "Order no."+ Model.id;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Process Order", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Customer.username)</th>
+        <th>@Html.DisplayNameFor(model => model.processed)</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(model => model.Customer.username)</td>
+        <td>
+            @{
+                Boolean isProcessed = Convert.ToBoolean(Model.processed);
+                @Html.DisplayFor(model => isProcessed.ToString())
+            }
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">
+            @Html.DisplayNameFor(model => model.OrderItems)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.OrderItems.Where(oi => oi.orderId == Model.id))
+    {
+        <tr>
+            <td colspan="2">
+                @Html.DisplayFor(modelItem => item.Game.title)
+            </td>
+        </tr>
+    }
+
+</table>

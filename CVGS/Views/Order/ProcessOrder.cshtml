@@ -1,0 +1,24 @@
+﻿@model CVGS.Models.Order
+
+@{
+    ViewBag.Title = "Process Order";
+}
+
+<h2>Process Order</h2>
+@foreach (var item in Model.OrderItems.Where(oi => oi.orderId == Model.id)) {
+    <p>
+        @Html.DisplayFor(modelItem => item.Game.title)
+    </p>
+}
+
+@using (Html.BeginForm()) {
+    @Html.HiddenFor(o => o.id)
+    @Html.HiddenFor(o => o.userId)
+    @Html.HiddenFor(o => o.processed)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Process" class="btn btn-default" />
+        </div>
+    </div>
+}

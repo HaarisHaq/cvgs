@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CVGS.Models.Cart>
+
+@{
+    ViewBag.Title = Model.First().Owner.username + "'s Cart";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Submit Order", "SendToOrder", new { userId = Model.First().userId })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.title)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.title)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,52 @@
+﻿@model CVGS.Models.GameReview
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GameReview</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Game.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.username)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.User.username.ToString(), "Details", "Member", new { id = Model.userId }, null)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.details)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("All Reviews", "Index") |
+    @Html.ActionLink("More Reviews for This Game", "GameAllReviews", new { gameId = Model.gameId }) |
+    @Html.ActionLink("Game Details", "Index", "Game", new { id = Model.gameId }, null)
+</p>
